@@ -75,6 +75,7 @@ def loan_book(isbn: str, borrower: str) -> tuple[bool, str, Optional[dict]]:
                     )
                 today = date.today()
                 book["estado"] = "prestado"
+                book["prestatario"] = borrower
                 book["fecha_prestamo"] = today.isoformat()
                 book["fecha_devolucion"] = (today + timedelta(days=14)).isoformat()
                 _write_db(books)
@@ -105,6 +106,7 @@ def loan_book_by_title(title: str, borrower: str) -> tuple[bool, str, Optional[d
                     )
                 today = date.today()
                 book["estado"] = "prestado"
+                book["prestatario"] = borrower
                 book["fecha_prestamo"] = today.isoformat()
                 book["fecha_devolucion"] = (today + timedelta(days=14)).isoformat()
                 _write_db(books)
@@ -128,6 +130,7 @@ def return_book(isbn: str) -> tuple[bool, str]:
                 if book["estado"] == "no prestado":
                     return (False, f"El libro '{book['titulo']}' ya está disponible, no tiene préstamo activo.")
                 book["estado"] = "no prestado"
+                book["prestatario"] = None
                 book["fecha_prestamo"] = None
                 book["fecha_devolucion"] = None
                 _write_db(books)

@@ -12,6 +12,7 @@
                     {{ result.book.estado }}
                 </span>
             </td></tr>
+            <tr><th>Prestatario</th><td>{{ result.book.prestatario or "—" }}</td></tr>
             <tr><th>Fecha préstamo</th><td>{{ result.book.fecha_prestamo or "—" }}</td></tr>
             <tr><th>Fecha devolución</th><td>{{ result.book.fecha_devolucion or "—" }}</td></tr>
         </table>
