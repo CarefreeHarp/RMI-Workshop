@@ -4,13 +4,30 @@ Encapsula la comunicación con el servidor ZMQ usando patrón REQ-REP.
 """
 
 import json
+import os
 import zmq
+
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.json")
+
+
+def _default_server_address() -> str:
+    """Lee la dirección del servidor desde config.json."""
+    try:
+        with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+        host = cfg["client"]["server_host"]
+        port = cfg["client"]["server_port"]
+        return f"tcp://{host}:{port}"
+    except Exception:
+        return "tcp://localhost:5555"
 
 
 class LibraryClient:
     """Cliente que se conecta al servidor ZMQ de la biblioteca."""
 
-    def __init__(self, server_address: str = "tcp://localhost:5555"):
+    def __init__(self, server_address: str | None = None):
+        if server_address is None:
+            server_address = _default_server_address()
         self.server_address = server_address
         self.context = zmq.Context()
         self.socket = self.context.socket(zmq.REQ)

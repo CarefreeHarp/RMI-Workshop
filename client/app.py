@@ -1,14 +1,29 @@
 """
 Aplicación web Flask con HTMX para la interfaz gráfica de la Biblioteca.
 Se conecta al servidor ZeroMQ para realizar operaciones.
+Lee configuración web desde config.json.
 """
+
+import json
+import os
 
 from flask import Flask, render_template, request
 from client.grpc_client import LibraryClient
 
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "config.json")
+
+
+def _load_web_config() -> dict:
+    try:
+        with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+            return json.load(f).get("web", {})
+    except Exception:
+        return {}
+
+
 app = Flask(__name__)
 
-# Cliente gRPC global
+# Cliente ZMQ global
 grpc_client = LibraryClient()
 
 
@@ -53,8 +68,13 @@ def return_isbn():
 
 
 if __name__ == "__main__":
+    web_cfg = _load_web_config()
+    host = web_cfg.get("host", "0.0.0.0")
+    port = web_cfg.get("port", 5000)
+    debug = web_cfg.get("debug", True)
+
     print("=" * 50)
     print(" Cliente Web de Biblioteca iniciado")
-    print(" Abrir en: http://localhost:5000")
+    print(f" Abrir en: http://localhost:{port}")
     print("=" * 50)
-    app.run(debug=True, port=5000)
+    app.run(debug=debug, host=host, port=port)
