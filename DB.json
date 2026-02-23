@@ -276,9 +276,9 @@
       "autores": [
         "John Katzenbach"
       ],
-      "estado": "no prestado",
-      "fecha_prestamo": null,
-      "fecha_devolucion": null
+      "estado": "prestado",
+      "fecha_prestamo": "2026-02-23",
+      "fecha_devolucion": "2026-03-09"
     },
     {
       "ISBN": "9780307346605",
@@ -296,9 +296,9 @@
       "autores": [
         "Thomas Harris"
       ],
-      "estado": "no prestado",
-      "fecha_prestamo": null,
-      "fecha_devolucion": null
+      "estado": "prestado",
+      "fecha_prestamo": "2026-02-23",
+      "fecha_devolucion": "2026-03-09"
     }
   ]
 }

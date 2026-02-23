@@ -15,10 +15,10 @@ from server.db import (
 
 # Acciones soportadas
 ACTIONS = {
-    "loan_by_isbn",
-    "loan_by_title",
-    "query_by_isbn",
-    "return_by_isbn",
+    "Prestamo por ISBN",
+    "Prestamo por Titulo",
+    "Consulta por ISBN",
+    "Devolucion por ISBN",
 }
 
 
@@ -29,13 +29,13 @@ def handle_request(message: dict) -> dict:
     if action not in ACTIONS:
         return {"success": False, "message": f"Acción desconocida: {action}"}
 
-    if action == "loan_by_isbn":
+    if action == "Prestamo por ISBN":
         return _loan_by_isbn(message)
-    elif action == "loan_by_title":
+    elif action == "Prestamo por Titulo":
         return _loan_by_title(message)
-    elif action == "query_by_isbn":
+    elif action == "Consulta por ISBN":
         return _query_by_isbn(message)
-    elif action == "return_by_isbn":
+    elif action == "Devolucion por ISBN":
         return _return_by_isbn(message)
 
 

@@ -40,7 +40,7 @@ class LibraryClient:
     def loan_by_isbn(self, isbn: str, borrower: str) -> dict:
         """Solicita préstamo de un libro por ISBN."""
         return self._send_request({
-            "action": "loan_by_isbn",
+            "action": "Prestamo por ISBN",
             "isbn": isbn,
             "borrower": borrower,
         })
@@ -48,7 +48,7 @@ class LibraryClient:
     def loan_by_title(self, title: str, borrower: str) -> dict:
         """Solicita préstamo de un libro por título."""
         return self._send_request({
-            "action": "loan_by_title",
+            "action": "Prestamo por Titulo",
             "title": title,
             "borrower": borrower,
         })
@@ -56,14 +56,14 @@ class LibraryClient:
     def query_by_isbn(self, isbn: str) -> dict:
         """Consulta un libro por ISBN."""
         return self._send_request({
-            "action": "query_by_isbn",
+            "action": "Consulta por ISBN",
             "isbn": isbn,
         })
 
     def return_by_isbn(self, isbn: str) -> dict:
         """Devuelve un libro por ISBN."""
         return self._send_request({
-            "action": "return_by_isbn",
+            "action": "Devolucion por ISBN",
             "isbn": isbn,
         })
 
