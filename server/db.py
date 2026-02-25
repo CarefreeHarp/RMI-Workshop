@@ -77,7 +77,7 @@ def loan_book(isbn: str, borrower: str) -> tuple[bool, str, Optional[dict]]:
                 book["estado"] = "prestado"
                 book["prestatario"] = borrower
                 book["fecha_prestamo"] = today.isoformat()
-                book["fecha_devolucion"] = (today + timedelta(days=14)).isoformat()
+                book["fecha_devolucion"] = (today + timedelta(days=7)).isoformat()
                 _write_db(books)
                 return (
                     True,
