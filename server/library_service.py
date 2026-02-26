@@ -107,7 +107,7 @@ def _return_by_isbn(msg: dict) -> dict:
 # Arranque del servicio 
 def run_service(bind_address: str = "tcp://*:5555"):
     """Inicia el loop del servicio ZMQ (socket REP)."""
-    context = zmq.Context()  # Contexto principal del servidor, se usa para crear los sockets ROUTER y DEALER
+    context = zmq.Context()  # Contexto principal del servidor, se usa para crear los sockets 
     socket = context.socket(zmq.REP) # Socket tipo REP (reply) para recibir peticiones y enviar respuestas
     socket.bind(bind_address) # Enlaza el socket a la dirección especificada para escuchar las peticiones entrantes
 
