@@ -17,10 +17,10 @@
       "autores": [
         "Miguel de Cervantes"
       ],
-      "estado": "no prestado",
-      "prestatario": null,
-      "fecha_prestamo": null,
-      "fecha_devolucion": null
+      "estado": "prestado",
+      "prestatario": "adas",
+      "fecha_prestamo": "2026-02-25",
+      "fecha_devolucion": "2026-03-04"
     },
     {
       "ISBN": "9780451524935",

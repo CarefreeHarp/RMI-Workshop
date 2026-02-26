@@ -2,12 +2,12 @@
 Módulo de acceso a datos - Lee y escribe el archivo DB.json.
 Usa threading.Lock para garantizar escrituras seguras en concurrencia.
 """
-
-import json
-import os
-import threading
-from datetime import date, timedelta
-from typing import Optional
+#Se importan las librerías necesarias para el desarrollo del taller
+import json #Librerias para manejo de archivos.json
+import os #Libreria para manejo de rutas en el sistema
+import threading # Libreria para manejo de concurrencia y asegurar escrituras seguras en el archivo JSON
+from datetime import date, timedelta # Libreria para manejo de fechas
+from typing import Optional # Libreria para anotaciones de tipos opcionales
 
 # Ruta al archivo de base de datos JSON (en la raíz del proyecto)
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "DB.json")
@@ -15,20 +15,20 @@ DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "DB.json")
 # Lock para escrituras concurrentes seguras
 _lock = threading.Lock()
 
-
+# Lee el json y retorna la lista de libros, cada libro es un diccionario con sus respectivos atributos
 def _read_db() -> list[dict]:
     """Lee todos los libros del archivo JSON."""
     with open(DB_PATH, "r", encoding="utf-8") as f:
         data = json.load(f)
         return data["libros"]
 
-
+# Reescribe el archivo cuando se realizan cambios en la base de datos
 def _write_db(books: list[dict]) -> None:
     """Escribe la lista de libros al archivo JSON."""
     with open(DB_PATH, "w", encoding="utf-8") as f:
         json.dump({"libros": books}, f, ensure_ascii=False, indent=2)
 
-
+# Funciones públicas que devuelven información solicitada de la base de datos
 def get_all_books() -> list[dict]:
     """Retorna todos los libros."""
     with _lock:
@@ -56,7 +56,7 @@ def get_book_by_title(title: str) -> Optional[dict]:
                 return book
         return None
 
-
+# Funciones públicas que realizan cambios en la base de datos, como préstamos y devoluciones, usando el lock para garantizar la integridad de los datos
 def loan_book(isbn: str, borrower: str) -> tuple[bool, str, Optional[dict]]:
     """
     Realiza el préstamo de un libro por ISBN.
